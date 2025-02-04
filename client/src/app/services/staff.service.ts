@@ -16,6 +16,11 @@ export class StaffService {
 	addStaffMember(staffData: any) {
 		return this.http.post(`${this.baseUrl}`, staffData);
 	}
+
+	getStaffById(staffId: string) {
+		return this.http.get<any>(`${this.baseUrl}/${staffId}`);
+	}
+
 	updateStaff(staffId: string, staffData: any) {
 		return this.http.put(`${this.baseUrl}/${staffId}`, staffData);
 	}

@@ -31,4 +31,14 @@ export const routes: Routes = [
 			title: "Add Staff",
 		},
 	},
+	{
+		path: "update/:id",
+		loadComponent: () =>
+			import("./staff-update/staff-update.component").then(
+				(m) => m.StaffUpdateComponent
+			),
+		data: {
+			title: "Update Staff",
+		},
+	},
 ];

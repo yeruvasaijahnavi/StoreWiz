@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { StaffService } from "src/app/services/staff.service";
+import { StaffService } from "../../../services/staff.service";
 
 @Component({
 	selector: "app-staff-view",

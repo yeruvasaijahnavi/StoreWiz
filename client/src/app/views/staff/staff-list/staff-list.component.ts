@@ -33,4 +33,8 @@ export class StaffListComponent implements OnInit {
 	viewStaffDetails(staffId: string) {
 		this.router.navigate(["/staff/view", staffId]);
 	}
+	updateStaffMember(staffId: string) {
+		console.log("Navigating to update staff with staffId:", staffId);
+		this.router.navigate(["/staff/update", staffId]);
+	}
 }
