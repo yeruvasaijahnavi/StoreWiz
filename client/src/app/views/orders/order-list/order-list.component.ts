@@ -7,7 +7,7 @@ import { TableModule } from "@coreui/angular";
 import { IconDirective } from "@coreui/icons-angular";
 import { AuthService } from "../../../services/auth.service";
 import { NgxPaginationModule } from "ngx-pagination";
-
+import { TabsModule } from "ngx-bootstrap/tabs";
 @Component({
 	selector: "app-order-list",
 	templateUrl: "./order-list.component.html",
@@ -18,6 +18,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 		TableModule,
 		IconDirective,
 		NgxPaginationModule,
+		TabsModule,
 	],
 })
 export class OrderListComponent implements OnInit {

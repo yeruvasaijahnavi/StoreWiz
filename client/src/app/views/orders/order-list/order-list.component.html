@@ -1,98 +1,106 @@
 <div class="container mt-4">
-	<div class="d-flex justify-content-between align-items-center mb-4">
-		<h2 class="mb-0">Order List</h2>
-		<button
-			class="btn btn-primary"
-			*ngIf="isRole('admin')"
-			(click)="router.navigate(['/orders/add'])"
-		>
-			Add Order
-		</button>
-	</div>
+	<tabset>
+		<!-- Orders List Tab -->
+		<tab heading="Orders">
+			<div class="d-flex justify-content-between align-items-center mb-4">
+				<h2 class="mb-0">Order List</h2>
+				<button
+					class="btn btn-primary"
+					*ngIf="isRole('admin')"
+					(click)="router.navigate(['/orders/add'])"
+				>
+					Add Order
+				</button>
+			</div>
 
-	<table cTable hover class="table table-bordered table-striped">
-		<thead class="table-primary">
-			<tr>
-				<th scope="col">Order ID</th>
-				<th scope="col">Customer ID</th>
-				<th scope="col">SKU</th>
-				<th scope="col">Item Name</th>
-				<th scope="col">Quantity</th>
-				<th scope="col">Status</th>
-				<th scope="col">Shipping Address</th>
-				<th scope="col">Order Date</th>
-				<th scope="col">Assigned Staff</th>
-				<th scope="col">Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr
-				*ngFor="
-					let order of filteredOrderList
-						| paginate
-							: {
-									itemsPerPage: itemsPerPage,
-									currentPage: currentPage
-							  }
-				"
-				class="table-row-hover"
-			>
-				<td>{{ order.orderId }}</td>
-				<td>{{ order.customerId }}</td>
-				<td>{{ order.inventoryItem?.sku }}</td>
-				<td>{{ order.inventoryItem?.name }}</td>
-				<td>{{ order.quantity }}</td>
-				<td>{{ order.status }}</td>
-				<td>{{ order.shippingAddress }}</td>
-				<td>{{ order.orderDate | date : "short" }}</td>
-				<td>
-					{{
-						order.assignedStaff
-							? order.assignedStaff.name
-							: "Not Assigned"
-					}}
-				</td>
-				<td>
-					<div class="d-flex align-items-center">
-						<span
-							class="text-info me-3"
-							title="View"
-							(click)="viewOrder(order.orderId)"
-						>
-							<svg cIcon name="cil-description"></svg>
-						</span>
-						<span
-							class="text-warning me-3"
-							title="Update Status"
-							(click)="
-								router.navigate([
-									'/orders/update-status',
-									order.orderId
-								])
-							"
-						>
-							<svg cIcon name="cil-pencil"></svg>
-						</span>
-						<span
-							*ngIf="isRole('admin')"
-							class="text-primary"
-							title="Assign Staff"
-							(click)="assignStaff(order.orderId)"
-						>
-							<svg cIcon name="cil-user-follow"></svg>
-						</span>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+			<table cTable hover class="table table-bordered table-striped">
+				<thead class="table-primary">
+					<tr>
+						<th scope="col">Order ID</th>
+						<th scope="col">Customer ID</th>
+						<th scope="col">SKU</th>
+						<th scope="col">Item Name</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Status</th>
+						<th scope="col">Shipping Address</th>
+						<th scope="col">Order Date</th>
+						<th scope="col">Assigned Staff</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						*ngFor="
+							let order of filteredOrderList
+								| paginate
+									: {
+											itemsPerPage: itemsPerPage,
+											currentPage: currentPage
+									  }
+						"
+						class="table-row-hover"
+					>
+						<td>{{ order.orderId }}</td>
+						<td>{{ order.customerId }}</td>
+						<td>{{ order.inventoryItem?.sku }}</td>
+						<td>{{ order.inventoryItem?.name }}</td>
+						<td>{{ order.quantity }}</td>
+						<td>{{ order.status }}</td>
+						<td>{{ order.shippingAddress }}</td>
+						<td>{{ order.orderDate | date : "short" }}</td>
+						<td>
+							{{
+								order.assignedStaff
+									? order.assignedStaff.name
+									: "Not Assigned"
+							}}
+						</td>
+						<td>
+							<div class="d-flex align-items-center">
+								<span
+									class="text-info me-3"
+									title="View"
+									(click)="viewOrder(order.orderId)"
+								>
+									<svg cIcon name="cil-description"></svg>
+								</span>
+								<span
+									class="text-warning me-3"
+									title="Update Status"
+									(click)="
+										router.navigate([
+											'/orders/update-status',
+											order.orderId
+										])
+									"
+								>
+									<svg cIcon name="cil-pencil"></svg>
+								</span>
+								<span
+									*ngIf="isRole('admin')"
+									class="text-primary"
+									title="Assign Staff"
+									(click)="assignStaff(order.orderId)"
+								>
+									<svg cIcon name="cil-user-follow"></svg>
+								</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
-	<!-- Pagination Controls -->
-	<div class="d-flex justify-content-center mt-3">
-		<pagination-controls
-			(pageChange)="currentPage = $event"
-		></pagination-controls>
-	</div>
+			<!-- Pagination Controls -->
+			<div class="d-flex justify-content-center mt-3">
+				<pagination-controls
+					(pageChange)="currentPage = $event"
+				></pagination-controls>
+			</div>
+		</tab>
 
-	<app-order-dashboard></app-order-dashboard>
+		<!-- Order Dashboard Tab -->
+		<tab heading="Dashboard">
+			<app-order-dashboard></app-order-dashboard>
+		</tab>
+	</tabset>
 </div>
