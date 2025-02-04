@@ -44,6 +44,13 @@ export class InventoryUpdateComponent implements OnInit {
 
 	updateInventoryItem(): void {
 		if (this.sku) {
+			if (
+				this.inventoryItem.quantity < 0 ||
+				this.inventoryItem.price < 0
+			) {
+				alert("Quantity and Price cannot be negative!");
+				return;
+			}
 			this.inventoryService
 				.updateInventoryItem(this.sku, this.inventoryItem)
 				.subscribe({
