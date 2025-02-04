@@ -17,7 +17,14 @@
 		</thead>
 		<tbody>
 			<tr
-				*ngFor="let orderProcessing of filteredOrderProcessings"
+				*ngFor="
+					let orderProcessing of filteredOrderProcessings
+						| paginate
+							: {
+									itemsPerPage: itemsPerPage,
+									currentPage: currentPage
+							  }
+				"
 				class="table-row-hover"
 			>
 				<td>P{{ orderProcessing._id?.slice(-3) }}</td>
@@ -52,53 +59,15 @@
 						>
 							View
 						</span>
-						<!-- <span
-							class="text-warning me-3"
-							title="Update Status"
-							(click)="
-								router.navigate([
-									'/orders/update-status',
-									order.orderId
-								])
-							"
-						>
-							<svg cIcon name="cil-pencil"></svg>
-						</span>
-						<span
-							class="text-primary"
-							title="Assign Staff"
-							(click)="assignStaff(order.orderId)"
-						>
-							<svg cIcon name="cil-user-follow"></svg>
-						</span> -->
 					</div>
 				</td>
-				<!-- <td>
-					<div class="d-flex align-items-center">
-						<span
-							class="text-info me-3"
-							title="View"
-							(click)="viewOrderProcessing(orderProcessing._id)"
-						>
-							<svg cIcon name="cil-description"></svg>
-						</span>
-						<span
-							class="text-warning me-3"
-							title="Update Status"
-							(click)="updateStatus(orderProcessing._id)"
-						>
-							<svg cIcon name="cil-pencil"></svg>
-						</span>
-						<span
-							class="text-primary"
-							title="Assign Staff"
-							(click)="assignStaff(orderProcessing._id)"
-						>
-							<svg cIcon name="cil-user-follow"></svg>
-						</span>
-					</div>
-				</td> -->
 			</tr>
 		</tbody>
 	</table>
+
+	<div class="d-flex justify-content-center mt-3">
+		<pagination-controls
+			(pageChange)="currentPage = $event"
+		></pagination-controls>
+	</div>
 </div>

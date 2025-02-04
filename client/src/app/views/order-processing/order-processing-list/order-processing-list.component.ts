@@ -1,20 +1,20 @@
 import { Component, inject } from "@angular/core";
-import { OrderProcessingService } from "src/app/services/order-processing.service";
+import { OrderProcessingService } from "../../../services/order-processing.service";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
-import { AuthService } from "src/app/services/auth.service"; // Import AuthService
-import { assign } from "lodash-es";
-
+import { AuthService } from "../../../services/auth.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
 	selector: "app-order-processing-list",
-	imports: [CommonModule],
+	imports: [CommonModule, NgxPaginationModule],
 	templateUrl: "./order-processing-list.component.html",
 	styleUrls: ["./order-processing-list.component.scss"],
 })
 export class OrderProcessingListComponent {
 	orderProcessings: any[] = [];
 	filteredOrderProcessings: any[] = [];
-
+	currentPage = 1;
+	itemsPerPage = 5;
 	constructor(
 		private orderProcessingService: OrderProcessingService,
 		private authService: AuthService // Inject AuthService
