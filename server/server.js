@@ -43,8 +43,8 @@ app.use((err, req, res, next) => {
 	res.status(500).send("Internal Server Error");
 });
 
-// app.listen(3000, () => {
-// 	console.log(`Server is running on port 3000`);
-// });
+app.listen(3000, () => {
+	console.log(`Server is running on port 3000`);
+});
 
 module.exports = app;

@@ -5,7 +5,9 @@ const Staff = require("../models/Staff");
 // Create a new staff member (POST /staff)
 router.post("/", async (req, res) => {
 	try {
-		const { staffId, name, role, email, shift, status } = req.body;
+		const { name, role, email, shift, status } = req.body;
+
+		const staffId = `S${Math.floor(1000 + Math.random() * 9000)}`; // gen random staff id
 
 		const newStaff = new Staff({
 			staffId,
@@ -15,6 +17,8 @@ router.post("/", async (req, res) => {
 			shift,
 			status,
 		});
+
+		console.log(newStaff);
 		await newStaff.save();
 
 		res.status(201).json({

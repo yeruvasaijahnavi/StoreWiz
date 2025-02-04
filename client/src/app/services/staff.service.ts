@@ -12,4 +12,8 @@ export class StaffService {
 	getStaffMembers() {
 		return this.http.get<any[]>(this.baseUrl);
 	}
+
+	addStaffMember(staffData: any) {
+		return this.http.post(`${this.baseUrl}`, staffData);
+	}
 }
