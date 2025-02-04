@@ -25,6 +25,16 @@ export const routes: Routes = [
 					import("./views/inventory/routes").then((m) => m.routes),
 			},
 			{
+				path: "report",
+				loadComponent: () =>
+					import(
+						"./views/inventory/inventory-report/inventory-report.component"
+					).then((m) => m.InventoryReportComponent),
+				data: {
+					title: "Inventory Report",
+				},
+			},
+			{
 				path: "orders",
 				loadChildren: () =>
 					import("./views/orders/routes").then((m) => m.routes),
