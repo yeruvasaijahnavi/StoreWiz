@@ -1,14 +1,3 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-	<h3>Inventory</h3>
-	<button
-		class="btn btn-primary"
-		*ngIf="isRole('admin')"
-		(click)="addInventory()"
-	>
-		Add Item
-	</button>
-</div>
-
 <table cTable hover class="table table-bordered table-striped">
 	<thead class="table-primary">
 		<tr>
@@ -24,7 +13,14 @@
 	</thead>
 	<tbody>
 		<tr
-			*ngFor="let item of inventoryList; let i = index"
+			*ngFor="
+				let item of inventoryList
+					| paginate
+						: {
+								itemsPerPage: itemsPerPage,
+								currentPage: currentPage
+						  }
+			"
 			class="table-row-hover"
 		>
 			<td>{{ item.sku }}</td>
@@ -64,3 +60,10 @@
 		</tr>
 	</tbody>
 </table>
+
+<!-- Pagination Controls -->
+<div class="d-flex justify-content-center mt-3">
+	<pagination-controls
+		(pageChange)="currentPage = $event"
+	></pagination-controls>
+</div>

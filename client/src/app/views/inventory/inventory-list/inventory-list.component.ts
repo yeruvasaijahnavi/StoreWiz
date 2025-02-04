@@ -5,14 +5,23 @@ import { Router } from "@angular/router";
 import { IconDirective } from "@coreui/icons-angular";
 import { TableModule, UtilitiesModule } from "@coreui/angular";
 import { AuthService } from "../../../services/auth.service";
+import { NgxPaginationModule } from "ngx-pagination";
 @Component({
 	selector: "app-inventory-list",
-	imports: [CommonModule, TableModule, UtilitiesModule, IconDirective],
+	imports: [
+		CommonModule,
+		TableModule,
+		UtilitiesModule,
+		IconDirective,
+		NgxPaginationModule,
+	],
 	templateUrl: "./inventory-list.component.html",
 	styleUrl: "./inventory-list.component.scss",
 })
 export class InventoryListComponent implements OnInit {
 	inventoryList: any[] = [];
+	currentPage = 1;
+	itemsPerPage = 6;
 	inventoryService = inject(InventoryService);
 	authService = inject(AuthService);
 	router = inject(Router);
