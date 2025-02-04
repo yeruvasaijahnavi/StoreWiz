@@ -1,6 +1,7 @@
 <div *ngIf="alerts.length > 0; else noAlerts">
 	<h2>Stock Alerts</h2>
 	<app-alerts-dashboard></app-alerts-dashboard>
+
 	<table cTable hover class="table">
 		<thead>
 			<tr>
@@ -11,7 +12,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let alert of alerts">
+			<tr
+				*ngFor="
+					let alert of alerts
+						| paginate
+							: {
+									itemsPerPage: itemsPerPage,
+									currentPage: currentPage
+							  }
+				"
+			>
 				<td>{{ alert.itemId?.name || "N/A" }}</td>
 				<td>{{ alert.threshold }}</td>
 				<td>{{ alert.alertDate | date : "short" }}</td>
@@ -19,6 +29,13 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<!-- Pagination Controls -->
+	<div class="d-flex justify-content-center mt-3">
+		<pagination-controls
+			(pageChange)="currentPage = $event"
+		></pagination-controls>
+	</div>
 </div>
 
 <ng-template #noAlerts>
