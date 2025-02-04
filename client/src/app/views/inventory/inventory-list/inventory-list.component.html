@@ -35,28 +35,30 @@
 			<td>{{ item.price | currency }}</td>
 			<td>{{ item.location }}</td>
 			<td>
-				<span
-					class="text-info me-3"
-					title="View"
-					(click)="viewInventoryItem(item.sku)"
-				>
-					<svg cIcon name="cil-description"></svg>
-				</span>
-				<span
-					*ngIf="isRole('admin')"
-					class="text-warning me-3"
-					title="Update"
-					(click)="updateInventoryItem(item.sku)"
-				>
-					<svg cIcon name="cil-pencil"></svg>
-				</span>
-				<span
-					*ngIf="isRole('admin')"
-					class="text-danger"
-					title="Delete"
-					(click)="deleteInventoryItem(item.sku)"
-				>
-					<svg cIcon name="cil-trash"></svg>
+				<span class="d-flex align-items-center gap-2">
+					<span
+						class="text-info"
+						title="View"
+						(click)="viewInventoryItem(item.sku)"
+					>
+						<svg cIcon name="cil-description"></svg>
+					</span>
+					<span
+						*ngIf="isRole('admin')"
+						class="text-warning"
+						title="Update"
+						(click)="updateInventoryItem(item.sku)"
+					>
+						<svg cIcon name="cil-pencil"></svg>
+					</span>
+					<span
+						*ngIf="isRole('admin')"
+						class="text-danger"
+						title="Delete"
+						(click)="deleteInventoryItem(item.sku)"
+					>
+						<svg cIcon name="cil-trash"></svg>
+					</span>
 				</span>
 			</td>
 		</tr>

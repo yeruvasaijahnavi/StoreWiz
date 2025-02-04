@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { IconDirective } from "@coreui/icons-angular";
 import { TableModule, UtilitiesModule } from "@coreui/angular";
-import { AuthService } from "src/app/services/auth.service";
+import { AuthService } from "../../../services/auth.service";
 @Component({
 	selector: "app-inventory-list",
 	imports: [CommonModule, TableModule, UtilitiesModule, IconDirective],
