@@ -43,7 +43,11 @@ router.post("/", authorizeUser(["admin"]), async (req, res) => {
 				.status(400)
 				.json({ message: "Item with this SKU already exists" });
 		}
-
+		if (quantity < 0 || price < 0) {
+			return res
+				.status(400)
+				.json({ message: "Quantity and Price cannot be negative" });
+		}
 		const newItem = new Inventory({
 			sku,
 			name,

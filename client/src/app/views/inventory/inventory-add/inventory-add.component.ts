@@ -28,14 +28,18 @@ export class InventoryAddComponent implements OnInit {
 	ngOnInit(): void {}
 
 	addInventoryItem() {
-		this.inventoryService.addInventoryItem(this.newItem).subscribe(
-			(response) => {
+		if (this.newItem.quantity < 0 || this.newItem.price < 0) {
+			alert("Quantity and Price cannot be negative!");
+			return;
+		}
+		this.inventoryService.addInventoryItem(this.newItem).subscribe({
+			next: (response) => {
 				console.log("Item added successfully:", response);
-				this.router.navigate(["/inventory"]); // Redirect to inventory list page after adding
+				this.router.navigate(["/inventory"]);
 			},
-			(error) => {
+			error: (error) => {
 				console.error("Error adding item:", error);
-			}
-		);
+			},
+		});
 	}
 }
