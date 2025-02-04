@@ -26,6 +26,14 @@ T10 steps
 -   [ ] remove 404 pgs
 -   [ ] remove extra things (comps, folders)
 -   [ ] redeploy
+    -   backend
+        -   commit all changes
+        -   open railway and redeploy
+    -   frontend
+        -   update environment link from local host to railway
+        -   npm run build:prod
+        -   commit everything
+        -   reploy on netlify
 -   [ ] revise angular basics
 -   [ ] test EVVERYTHING
 
