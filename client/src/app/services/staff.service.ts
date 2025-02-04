@@ -16,4 +16,7 @@ export class StaffService {
 	addStaffMember(staffData: any) {
 		return this.http.post(`${this.baseUrl}`, staffData);
 	}
+	updateStaff(staffId: string, staffData: any) {
+		return this.http.put(`${this.baseUrl}/${staffId}`, staffData);
+	}
 }
