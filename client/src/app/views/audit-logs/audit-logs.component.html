@@ -19,8 +19,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let log of auditLogs; index as i">
-				<td>{{ i + 1 }}</td>
+			<tr
+				*ngFor="
+					let log of auditLogs
+						| paginate
+							: {
+									itemsPerPage: itemsPerPage,
+									currentPage: currentPage
+							  };
+					index as i
+				"
+			>
+				<td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
 				<td>{{ log.actionType }}</td>
 				<td>{{ log.description }}</td>
 				<td>{{ log.userId }}</td>
@@ -28,6 +38,12 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<div class="d-flex justify-content-center mt-3">
+		<pagination-controls
+			(pageChange)="currentPage = $event"
+		></pagination-controls>
+	</div>
 
 	<ng-template #noLogs>
 		<p>No audit logs available.</p>
