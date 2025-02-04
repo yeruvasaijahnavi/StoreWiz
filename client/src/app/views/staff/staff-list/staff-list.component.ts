@@ -4,15 +4,18 @@ import { StaffService } from "../../../services/staff.service";
 import { CommonModule } from "@angular/common";
 import { TableModule } from "@coreui/angular";
 import { IconDirective } from "@coreui/icons-angular";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @Component({
 	selector: "app-staff-list",
 	templateUrl: "./staff-list.component.html",
 	styleUrls: ["./staff-list.component.scss"],
-	imports: [CommonModule, TableModule, IconDirective],
+	imports: [CommonModule, TableModule, IconDirective, NgxPaginationModule],
 })
 export class StaffListComponent implements OnInit {
 	staffList: any[] = [];
+	currentPage = 1;
+	itemsPerPage = 6;
 
 	router = inject(Router);
 	staffService = inject(StaffService);

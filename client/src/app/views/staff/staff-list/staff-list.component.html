@@ -23,7 +23,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let staff of staffList" class="table-row-hover">
+			<tr
+				*ngFor="
+					let staff of staffList
+						| paginate
+							: {
+									itemsPerPage: itemsPerPage,
+									currentPage: currentPage
+							  }
+				"
+				class="table-row-hover"
+			>
 				<td>{{ staff.staffId }}</td>
 				<td>{{ staff.name }}</td>
 				<td>{{ staff.email }}</td>
@@ -31,29 +41,37 @@
 				<td>{{ staff.shift }}</td>
 				<td>{{ staff.status }}</td>
 				<td>
-					<span
-						class="text-info me-3"
-						title="View"
-						(click)="viewStaffDetails(staff.staffId)"
-					>
-						<svg cIcon name="cil-description"></svg>
-					</span>
-					<span
-						class="text-warning me-3"
-						title="Update"
-						(click)="updateStaffMember(staff.staffId)"
-					>
-						<svg cIcon name="cil-pencil"></svg>
-					</span>
-					<span
-						class="text-danger"
-						title="Delete"
-						(click)="deleteStaffMember(staff.staffId)"
-					>
-						<svg cIcon name="cil-trash"></svg>
+					<span class="d-flex align-items-center gap-2">
+						<span
+							class="text-info"
+							title="View"
+							(click)="viewStaffDetails(staff.staffId)"
+						>
+							<svg cIcon name="cil-description"></svg>
+						</span>
+						<span
+							class="text-warning"
+							title="Update"
+							(click)="updateStaffMember(staff.staffId)"
+						>
+							<svg cIcon name="cil-pencil"></svg>
+						</span>
+						<span
+							class="text-danger"
+							title="Delete"
+							(click)="deleteStaffMember(staff.staffId)"
+						>
+							<svg cIcon name="cil-trash"></svg>
+						</span>
 					</span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+
+	<div class="d-flex justify-content-center mt-3">
+		<pagination-controls
+			(pageChange)="currentPage = $event"
+		></pagination-controls>
+	</div>
 </div>
