@@ -5,7 +5,8 @@ import { Router } from "@angular/router";
 import { OrdersDashboardComponent } from "../../dashboard/orders-dashboard/orders-dashboard.component";
 import { TableModule } from "@coreui/angular";
 import { IconDirective } from "@coreui/icons-angular";
-import { AuthService } from "src/app/services/auth.service"; // Import the AuthService
+import { AuthService } from "../../../services/auth.service";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @Component({
 	selector: "app-order-list",
@@ -16,6 +17,7 @@ import { AuthService } from "src/app/services/auth.service"; // Import the AuthS
 		OrdersDashboardComponent,
 		TableModule,
 		IconDirective,
+		NgxPaginationModule,
 	],
 })
 export class OrderListComponent implements OnInit {
@@ -23,34 +25,31 @@ export class OrderListComponent implements OnInit {
 	public filteredOrderList: any[] = [];
 	orderService = inject(OrderService);
 	router = inject(Router);
-	authService = inject(AuthService); // Inject the AuthService
+	authService = inject(AuthService);
+
+	// Pagination variables
+	currentPage = 1;
+	itemsPerPage = 5;
 
 	ngOnInit(): void {
 		this.orderService.getOrders().subscribe((orders: any) => {
 			this.orderList = orders;
-
-			// Filter orders based on the user role
 			this.filterOrders();
 		});
 	}
 
-	// Filter orders based on staff assignment (only if the user is a staff)
 	filterOrders(): void {
-		const currentUser = this.authService.getUser(); // Get the current user info
-		console.log(this.orderList, currentUser);
+		const currentUser = this.authService.getUser();
 		if (currentUser.role === "staff") {
-			// If the user is staff, only show orders assigned to them
 			this.filteredOrderList = this.orderList.filter(
 				(order) => order.assignedStaff?.email === currentUser.email
 			);
 		} else {
-			// If the user is admin or other roles, show all orders
 			this.filteredOrderList = this.orderList;
 		}
 	}
 
 	viewOrder(orderId: string): void {
-		console.log("Viewing order with ID:", orderId);
 		this.router.navigate([`/orders/view/${orderId}`]);
 	}
 

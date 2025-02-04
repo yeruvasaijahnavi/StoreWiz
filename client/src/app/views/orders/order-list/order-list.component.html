@@ -17,7 +17,6 @@
 				<th scope="col">Customer ID</th>
 				<th scope="col">SKU</th>
 				<th scope="col">Item Name</th>
-				<!-- New column for Item Name -->
 				<th scope="col">Quantity</th>
 				<th scope="col">Status</th>
 				<th scope="col">Shipping Address</th>
@@ -27,13 +26,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let order of filteredOrderList" class="table-row-hover">
+			<tr
+				*ngFor="
+					let order of filteredOrderList
+						| paginate
+							: {
+									itemsPerPage: itemsPerPage,
+									currentPage: currentPage
+							  }
+				"
+				class="table-row-hover"
+			>
 				<td>{{ order.orderId }}</td>
 				<td>{{ order.customerId }}</td>
 				<td>{{ order.inventoryItem?.sku }}</td>
-				<!-- Display SKU -->
 				<td>{{ order.inventoryItem?.name }}</td>
-				<!-- Display Item Name -->
 				<td>{{ order.quantity }}</td>
 				<td>{{ order.status }}</td>
 				<td>{{ order.shippingAddress }}</td>
@@ -79,6 +86,13 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<!-- Pagination Controls -->
+	<div class="d-flex justify-content-center mt-3">
+		<pagination-controls
+			(pageChange)="currentPage = $event"
+		></pagination-controls>
+	</div>
 
 	<app-order-dashboard></app-order-dashboard>
 </div>
