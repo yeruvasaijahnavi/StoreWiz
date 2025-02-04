@@ -24,4 +24,8 @@ export class StaffService {
 	updateStaff(staffId: string, staffData: any) {
 		return this.http.put(`${this.baseUrl}/${staffId}`, staffData);
 	}
+
+	deleteStaff(staffId: string) {
+		return this.http.delete(`${this.baseUrl}/${staffId}`);
+	}
 }

@@ -102,7 +102,9 @@ router.put("/:id", async (req, res) => {
 // Remove a staff member (DELETE /staff/:id)
 router.delete("/:id", async (req, res) => {
 	try {
-		const deletedStaff = await Staff.findOneAndDelete(req.params.id);
+		const deletedStaff = await Staff.findOneAndDelete({
+			staffId: req.params.id,
+		});
 
 		if (!deletedStaff) {
 			return res.status(404).json({ message: "Staff member not found" });

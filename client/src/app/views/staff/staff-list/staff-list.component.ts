@@ -37,4 +37,20 @@ export class StaffListComponent implements OnInit {
 		console.log("Navigating to update staff with staffId:", staffId);
 		this.router.navigate(["/staff/update", staffId]);
 	}
+
+	deleteStaffMember(staffId: string) {
+		if (confirm("Are you sure you want to delete this staff member?")) {
+			this.staffService.deleteStaff(staffId).subscribe({
+				next: (response) => {
+					console.log("Staff member deleted successfully:", response);
+					this.staffList = this.staffList.filter(
+						(staff) => staff.staffId !== staffId
+					);
+				},
+				error: (error) => {
+					console.error("Error deleting staff member:", error);
+				},
+			});
+		}
+	}
 }
