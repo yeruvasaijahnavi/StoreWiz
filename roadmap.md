@@ -5,7 +5,7 @@
     -   [x] ~~_start from backend (create working api, then frontend)_~~ [2025-02-04]
     -   [x] ~~_flow: backend [model schema -> crud route -> controller] -> frontend [model -> service -> component]_~~ [2025-02-04]
 -   [x] ~~_fix user avatar img_~~ [2025-02-03]
--   [ ] add edit and delete staff buttons
+-   [x] ~~_add edit and delete staff buttons_~~ [2025-02-05]
     -   [x] ~~_create edit view_~~ [2025-02-04]
     -   [x] ~~_create delete view_~~ [2025-02-04]
 -   [x] ~~_fix negative values of stock_~~ [2025-02-04]
@@ -24,6 +24,7 @@ T10 steps
 
 -   [x] ~~_add db schema to ppt_~~ [2025-02-05]
 -   [x] ~~_remove 404 pgs_~~ [2025-02-05]
+-   [x] ~~_change email_~~ [2025-02-05]
 -   [ ] remove extra things (comps, folders)
 -   [ ] redeploy
     -   backend
