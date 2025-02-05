@@ -23,7 +23,7 @@ EXTRA
 T10 steps
 
 -   [x] ~~_add db schema to ppt_~~ [2025-02-05]
--   [ ] remove 404 pgs
+-   [x] ~~_remove 404 pgs_~~ [2025-02-05]
 -   [ ] remove extra things (comps, folders)
 -   [ ] redeploy
     -   backend
