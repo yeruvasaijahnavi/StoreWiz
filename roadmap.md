@@ -22,7 +22,7 @@ EXTRA
 
 T10 steps
 
--   [ ] add db schema to ppt
+-   [x] ~~_add db schema to ppt_~~ [2025-02-05]
 -   [ ] remove 404 pgs
 -   [ ] remove extra things (comps, folders)
 -   [ ] redeploy
@@ -34,6 +34,7 @@ T10 steps
         -   npm run build:prod
         -   commit everything
         -   reploy on netlify
+        -   reploy on AZURE
 -   [ ] revise angular basics
 -   [ ] test EVVERYTHING
 
