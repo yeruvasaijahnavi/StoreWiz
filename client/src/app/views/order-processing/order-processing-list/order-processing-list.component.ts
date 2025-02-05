@@ -74,4 +74,8 @@ export class OrderProcessingListComponent {
 	viewOrder(orderId: string): void {
 		this.router.navigate(["view", orderId]); // Navigate to view order
 	}
+
+	isRole(role: string): boolean {
+		return this.authService.hasRole(role);
+	}
 }
