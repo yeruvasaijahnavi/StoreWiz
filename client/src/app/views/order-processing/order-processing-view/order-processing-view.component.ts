@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { ProgressComponent, ProgressStackedComponent } from "@coreui/angular";
-import { OrderProcessingService } from "src/app/services/order-processing.service";
+import { OrderProcessingService } from "../../../services/order-processing.service";
 
 @Component({
 	selector: "order-processing-view",
@@ -26,7 +26,7 @@ export class OrderProcessingViewComponent {
 		"shipped",
 		"delivered",
 	];
-	currStatus = "pending";
+	currStatus = "";
 	progressValue = 0;
 	startCountdown = false; // Property to track checkbox state
 	private intervalId: any;
@@ -40,17 +40,25 @@ export class OrderProcessingViewComponent {
 		const orderId = this.route.snapshot.paramMap.get("id");
 		if (orderId) {
 			this.fetchOrderDetails(orderId);
-			this.currStatus = this.order.status;
 		}
 	}
 
 	fetchOrderDetails(orderId: string): void {
 		this.orderProcessingService.getOrderDetails(orderId).subscribe({
 			next: (data) => {
-				this.order = data.order;
-				this.auditLogs = data.auditLogs;
-				console.log("Order details:", data);
-				this.calculateProgressValue();
+				if (data.order) {
+					this.order = data.order;
+					this.auditLogs = data.auditLogs;
+					console.log("Order details:", data);
+
+					// Ensure order has a status before setting it
+					this.currStatus = this.order.status || "pending";
+					console.log("Current status:", this.currStatus);
+
+					this.calculateProgressValue();
+				} else {
+					console.error("Order data is null or undefined");
+				}
 			},
 			error: (err) => {
 				console.error("Error fetching order details:", err);
@@ -59,6 +67,9 @@ export class OrderProcessingViewComponent {
 	}
 
 	calculateProgressValue(): number {
+		if (!this.order || !this.order.status) {
+			return 0; // Return 0 if order data isn't loaded yet
+		}
 		this.progressValue =
 			(this.statuses.indexOf(this.order.status) + 1) *
 			(100 / this.statuses.length);
