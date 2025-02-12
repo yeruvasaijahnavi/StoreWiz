@@ -7,6 +7,7 @@
 			<tr>
 				<th>Item Name</th>
 				<th>Threshold</th>
+				<th>Current Stock</th>
 				<th>Alert Date</th>
 				<th>Status</th>
 			</tr>
@@ -24,6 +25,7 @@
 			>
 				<td>{{ alert.itemId?.name || "N/A" }}</td>
 				<td>{{ alert.threshold }}</td>
+				<td>{{ alert.itemId?.quantity }}</td>
 				<td>{{ alert.alertDate | date : "short" }}</td>
 				<td>{{ alert.status }}</td>
 			</tr>
